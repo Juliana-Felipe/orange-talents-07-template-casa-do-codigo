@@ -28,7 +28,7 @@ public class EmailAutorValidacao implements Validator {
         AutorDTO autorDTO = (AutorDTO) obj;
         Optional<Autor> autor = autorRepository.findByEmail(autorDTO.getEmail());
         if (autor.isPresent()) {
-            e.rejectValue("email", null,"este email: " + autorDTO.getEmail() + "já está cadastrado");
+            e.rejectValue("email", null,"este email: " + autorDTO.getEmail() + " já está cadastrado");
         }
     }
 }
