@@ -1,9 +1,6 @@
 package br.com.zupacademy.juliana.casadocodigo.autor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
@@ -16,6 +13,7 @@ public class Autor {
     private String nome;
     @Email
     @NotBlank
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Size(max = 400)
@@ -23,6 +21,7 @@ public class Autor {
     @NotNull
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
+    @Deprecated
     public Autor() {
     }
 

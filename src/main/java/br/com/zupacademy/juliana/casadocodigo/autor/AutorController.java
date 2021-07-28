@@ -2,18 +2,21 @@ package br.com.zupacademy.juliana.casadocodigo.autor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/autor")
 public class AutorController {
     @Autowired
     AutorRepository autorRepository;
+    @Autowired
+    EmailAutorValidacao emailAutorValidacao;
+
 
     @PostMapping
     public ResponseEntity cadastraAutor(@RequestBody @Valid AutorDTO autorDTO) {
@@ -21,5 +24,10 @@ public class AutorController {
         autorRepository.save(autor);
         return ResponseEntity.ok().build();
 
+    }
+
+    @InitBinder("autorDTO")
+    void binder(WebDataBinder binder) {
+        binder.addValidators(emailAutorValidacao);
     }
 }

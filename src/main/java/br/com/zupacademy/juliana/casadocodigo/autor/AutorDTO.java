@@ -1,6 +1,9 @@
 package br.com.zupacademy.juliana.casadocodigo.autor;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,10 +11,11 @@ import javax.validation.constraints.Size;
 
 public class AutorDTO {
 
-    @NotNull
+    @NotBlank
     private String nome;
     @Email
     @NotBlank
+
     private String email;
     @NotBlank
     @Size(max = 400)
@@ -21,6 +25,10 @@ public class AutorDTO {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Autor converter() {
