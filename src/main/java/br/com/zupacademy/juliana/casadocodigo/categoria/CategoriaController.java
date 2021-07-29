@@ -14,18 +14,10 @@ public class CategoriaController {
     @Autowired
     CategoriaRepository categoriaRepository;
 
-    @Autowired
-    NomeCategoriaValidacao nomeCategoriaValidacao;
-
     @PostMapping
     public ResponseEntity salvaCategoria(@RequestBody @Valid CategoriaDTO categoriaDTO) {
         Categoria categoria = categoriaDTO.toModel();
         categoriaRepository.save(categoria);
         return ResponseEntity.ok().build();
     }
-    @InitBinder("categoriaDTO")
-    void binder(WebDataBinder binder) {
-        binder.addValidators(nomeCategoriaValidacao);
-    }
-
 }

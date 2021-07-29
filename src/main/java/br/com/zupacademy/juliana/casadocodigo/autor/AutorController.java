@@ -14,9 +14,6 @@ import java.util.Optional;
 public class AutorController {
     @Autowired
     AutorRepository autorRepository;
-    @Autowired
-    EmailAutorValidacao emailAutorValidacao;
-
 
     @PostMapping
     public ResponseEntity cadastraAutor(@RequestBody @Valid AutorDTO autorDTO) {
@@ -26,8 +23,5 @@ public class AutorController {
 
     }
 
-    @InitBinder("autorDTO")
-    void binder(WebDataBinder binder) {
-        binder.addValidators(emailAutorValidacao);
-    }
+
 }

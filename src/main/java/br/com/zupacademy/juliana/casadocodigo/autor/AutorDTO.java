@@ -1,6 +1,7 @@
 package br.com.zupacademy.juliana.casadocodigo.autor;
 
 
+import br.com.zupacademy.juliana.casadocodigo.Config.UniqueValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class AutorDTO {
     private String nome;
     @Email
     @NotBlank
-
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
     @NotBlank
     @Size(max = 400)
