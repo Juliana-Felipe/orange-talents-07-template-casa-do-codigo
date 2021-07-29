@@ -15,7 +15,7 @@ public class CategoriaController {
     CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public ResponseEntity salvaCategoria(@RequestBody @Valid CategoriaDTO categoriaDTO) {
+    public ResponseEntity cadastraCategoria(@RequestBody @Valid CategoriaDTO categoriaDTO) {
         Categoria categoria = categoriaDTO.toModel();
         categoriaRepository.save(categoria);
         return ResponseEntity.ok().build();

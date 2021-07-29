@@ -2,12 +2,9 @@ package br.com.zupacademy.juliana.casadocodigo.autor;
 
 
 import br.com.zupacademy.juliana.casadocodigo.Config.UniqueValue;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AutorDTO {
