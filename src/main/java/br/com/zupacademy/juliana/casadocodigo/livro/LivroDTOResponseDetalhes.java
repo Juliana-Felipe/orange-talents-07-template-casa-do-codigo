@@ -4,72 +4,46 @@ import br.com.zupacademy.juliana.casadocodigo.Config.ExistsInDataBase;
 import br.com.zupacademy.juliana.casadocodigo.autor.Autor;
 import br.com.zupacademy.juliana.casadocodigo.categoria.Categoria;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.ISBN;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+public class LivroDTOResponseDetalhes {
 
-@Entity
-public class Livro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @NotBlank
-    @Column(unique = true)
     private String titulo;
 
-    @NotBlank
-    @Size(max = 500)
     private String resumo;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
     private String sumario;
 
-    @NotNull
-    @DecimalMin(value = "20.00", inclusive = true)
     private BigDecimal preco;
 
-    @NotNull
-    @Min(100)
     private Integer paginas;
 
-    @NotBlank
-    @Column(unique = true)
-    @ISBN
     private String isbn;
 
-    @Future
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataLancamento;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ExistsInDataBase(domainClass = Categoria.class, fieldName = "id")
     private Categoria categoria;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ExistsInDataBase(domainClass = Autor.class, fieldName = "id")
     private Autor autor;
 
-    public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer paginas, String isbn, LocalDate dataLancamento, Categoria categoria, Autor autor) {
-        this.titulo = titulo;
-        this.resumo = resumo;
-        this.sumario = sumario;
-        this.preco = preco;
-        this.paginas = paginas;
-        this.isbn = isbn;
-        this.dataLancamento = dataLancamento;
-        this.categoria = categoria;
-        this.autor = autor;
-    }
-
-    @Deprecated
-    public Livro() {
-    }
-
-    public Long getId() {
-        return id;
+    @Valid
+    public LivroDTOResponseDetalhes(Livro livro) {
+        this.titulo = livro.getTitulo();
+        this.resumo = livro.getResumo();
+        this.sumario = livro.getSumario();
+        this.preco = livro.getPreco();
+        this.paginas = livro.getPaginas();
+        this.isbn = livro.getIsbn();
+        this.dataLancamento = livro.getDataLancamento();
+        this.categoria = livro.getCategoria();
+        this.autor = livro.getAutor();
     }
 
     public String getTitulo() {

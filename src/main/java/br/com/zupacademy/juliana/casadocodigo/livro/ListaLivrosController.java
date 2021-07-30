@@ -30,5 +30,18 @@ public class ListaLivrosController {
         }
         return new ResponseEntity<>(listaDTO, HttpStatus.OK);
     }
-    
+
+
+    @GetMapping("/{id}")
+
+    public ResponseEntity<LivroDTOResponseDetalhes> livro(@PathVariable Long id){
+        Optional<Livro> possivelLivro= livroRepository.findById(id);
+        if(possivelLivro.isEmpty()){
+            return new ResponseEntity("O Id informado não está em nossa base de dados", HttpStatus.NOT_FOUND);
+        }
+        @Valid Livro livro = possivelLivro.get();
+        LivroDTOResponseDetalhes detalhes = new LivroDTOResponseDetalhes(livro);
+        return new ResponseEntity<>(detalhes, HttpStatus.OK);
+    }
+
 }

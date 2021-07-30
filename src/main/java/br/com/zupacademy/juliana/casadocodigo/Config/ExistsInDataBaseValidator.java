@@ -26,7 +26,7 @@ public class ExistsInDataBaseValidator implements ConstraintValidator<ExistsInDa
         Query query = entityManager.createQuery("select * from "+klass.getName()+" where " + domainAttribute + " = :value");
         query.setParameter("value", value);
         List<?> list = query.getResultList();
-        Assert.state(list.size()!=0, "O registro de " +klass.getName()+ " com o atributo " + domainAttribute+ " não foi encontrado em nossa base de dados.");
-        return list.contains(value);
+        Assert.state(list.size()<=1, "O registro de " +klass.getName()+ " com o atributo " + domainAttribute+ " foi encontrado repetidas vezes em nossa base de dados.");
+        return list.contains(value);//Alberto !list..isEmpty();
     }
 }
