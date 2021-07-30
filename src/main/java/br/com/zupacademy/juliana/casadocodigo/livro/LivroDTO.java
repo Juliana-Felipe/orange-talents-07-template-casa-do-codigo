@@ -3,16 +3,12 @@ package br.com.zupacademy.juliana.casadocodigo.livro;
 import br.com.zupacademy.juliana.casadocodigo.Config.UniqueValue;
 import br.com.zupacademy.juliana.casadocodigo.autor.Autor;
 import br.com.zupacademy.juliana.casadocodigo.categoria.Categoria;
-import br.com.zupacademy.juliana.casadocodigo.categoria.CategoriaRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.ISBN;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class LivroDTO {
 
@@ -41,14 +37,18 @@ public class LivroDTO {
     private String isbn;
 
     @Future
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="Brazil/East")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataLancamento;
 
+    @NotNull
     private Long categoriaId;
 
+    @NotNull
     private Long autorId;
 
-    public LivroDTO(String titulo, String resumo, String sumario, BigDecimal preco, Integer paginas, String isbn, @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone="Brazil/East") LocalDate dataLancamento, Long categoriaId, Long autorId) {
+    public LivroDTO(String titulo, String resumo, String sumario, BigDecimal preco, Integer paginas, String isbn,
+                    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") LocalDate dataLancamento,
+                    Long categoriaId, Long autorId) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;

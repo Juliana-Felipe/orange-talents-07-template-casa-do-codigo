@@ -1,16 +1,15 @@
 package br.com.zupacademy.juliana.casadocodigo.livro;
 
+import br.com.zupacademy.juliana.casadocodigo.Config.ExistsInDataBase;
 import br.com.zupacademy.juliana.casadocodigo.autor.Autor;
 import br.com.zupacademy.juliana.casadocodigo.categoria.Categoria;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.ISBN;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
+
 
 @Entity
 public class Livro {
@@ -44,13 +43,13 @@ public class Livro {
     private String isbn;
 
     @Future
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "Brazil/East")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataLancamento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Autor autor;
 
     public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer paginas, String isbn, LocalDate dataLancamento, Categoria categoria, Autor autor) {
@@ -68,4 +67,13 @@ public class Livro {
     @Deprecated
     public Livro() {
     }
-}
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    }

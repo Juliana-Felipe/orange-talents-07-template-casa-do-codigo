@@ -18,4 +18,5 @@ public class Categoria{
 @Deprecated
     public Categoria() {
     }
+
 }
