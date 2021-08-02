@@ -28,4 +28,15 @@ public class Estado {
 
     public Estado() {
     }
+
+    public Pais getPais() {
+        return pais;
+    }
+    public static boolean estadoValido(Pais pais, Estado estado) {
+        Long idPaisEstado = estado.getPais().getId();
+        if(idPaisEstado == pais.getId()) {
+            return true;
+        }
+        return false;
+    }
 }

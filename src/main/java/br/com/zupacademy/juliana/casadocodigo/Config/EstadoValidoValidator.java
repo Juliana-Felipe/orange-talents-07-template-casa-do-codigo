@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
+import java.util.Locale;
 
 public class EstadoValidoValidator implements ConstraintValidator<EstadoValido, EstadoDTO> {
 
@@ -19,7 +20,7 @@ public class EstadoValidoValidator implements ConstraintValidator<EstadoValido, 
    @Override
     public boolean isValid(EstadoDTO value, ConstraintValidatorContext context) {
         Query query = entityManager.createQuery("select 1 from " + Estado.class.getName() + " e where e.nome = :nome and e.pais.id = :paisId");
-        query.setParameter("nome", value.getNome());
+        query.setParameter("nome", value.getNome().toLowerCase(Locale.ROOT).trim());
         query.setParameter("paisId", value.getPaisId());
 
         List<?> list = query.getResultList();

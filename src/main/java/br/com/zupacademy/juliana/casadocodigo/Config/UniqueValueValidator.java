@@ -26,7 +26,7 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        Query query = entityManager.createQuery("select 1 from "+klass.getName()+" where " + domainAttribute.toLowerCase(Locale.ROOT).trim() + " = :value");
+        Query query = entityManager.createQuery("select 1 from " +klass.getName()+ " where " + domainAttribute.toLowerCase(Locale.ROOT).trim() + " = :value");
         query.setParameter("value", value.toString().toLowerCase(Locale.ROOT).trim());
         List<?> list = query.getResultList();
         Assert.state(list.size()<=1, "Foi encontrado mais de um " +klass.getName()+ " com o mesmo atributo " + domainAttribute+ ".");

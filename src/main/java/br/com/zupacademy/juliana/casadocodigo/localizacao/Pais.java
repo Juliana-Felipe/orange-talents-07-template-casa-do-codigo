@@ -18,4 +18,8 @@ public class Pais {
 
     public Pais() {
     }
+
+    public Long getId() {
+        return id;
+    }
 }
